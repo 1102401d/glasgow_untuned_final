@@ -1,0 +1,38 @@
+{% extends "glasuntu/base.html" %}
+
+{% block head %}
+	<input id = "uEnt" type = "text" placeholder = "Username">
+	<input id = "pEnt" type "text" placeholder = "Password">
+{% endblock head %}
+
+{% block content %}
+
+<body>
+	
+	<div class = "jumbotron">
+		<h1>Search Results</h1>
+	</div>
+	
+	<ul>
+		{% for query in queries %}
+			<div class="panel panel-default">
+					{% if view == "venue" %}
+						<div class = "panel-heading">
+							<h3>
+								<li><a href = "{% url 'glasuntu:venue' venue_id=query.id %}">{{ query }}</a></li>
+							</h3>
+						</div>
+					{% else %}
+						<div class = "panel-heading">
+							<h3>
+								<li><a href = "{% url 'glasuntu:artist' artist_id=query.id %}">{{ query }}</a></li>
+							</h3>
+						</div>
+			</div>
+			{% endif %}
+		{% empty %}
+			<p><em>No matches found.</em></p>
+		{% endfor %}
+	</ul>
+
+{% endblock content %}

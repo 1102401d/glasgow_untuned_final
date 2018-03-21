@@ -1,0 +1,59 @@
+{% extends "glasuntu/base.html" %}
+
+<head>
+	<title>Glasgow Untuned Homepage</title>
+	<meta name = "authors" content = "Matthew Murray, Jamie Howitt, Jamie Dickson">
+	<meta name = "page description" content = "This is the homepage of Glasgow Untuned, a site for discovering music venues and upcoming performances">
+</head>
+
+{% block header %}
+<head>
+	<title>Glasgow Untuned Homepage</title>
+	<meta name = "authors" content = "Matthew Murray, Jamie Howitt, Jamie Dickson">
+	<meta name = "page description" content = "This is the homepage of Glasgow Untuned, a site for discovering music venues and upcoming performances">
+</head>
+<!--
+<form method = "POST" action = "">
+	<input id = "uEnt" type = "text" placeholder = "Username">
+	<input id = "pEnt" type = "text" placeholder = "Password">
+	<input id = "loginButt" type = "submit" value = "Login">
+</form>
+-->
+
+<div class = "jumbotron">
+	<h1>Welcome to Glasgow Untuned</h1>
+</div>
+{% endblock header %}
+
+{% block content %}
+<body>
+	<div class = "col-md-6" id = "upcoming">
+		<h2>Upcoming Events</h2>
+			<nav id = "EventsNav">
+				<ul>
+					{% for event in events %}
+						<li><a href="{% url 'glasuntu:artist' event.name.id %}">{{ event.name.name }}</a> at <a href="{% url 'glasuntu:venue' event.venue.id %}">{{event.venue}}</a></li>
+					{% empty %}
+						<li>No events are scheduled yet.</li>
+					{% endfor %}
+				</ul>
+			</nav>
+	</div>
+
+	<div class = "col-md-6" id = "recent">
+		<h2>Most Liked Venues</h2>
+			<nav id = "RecentNav">
+				<ul>
+					{% for venue in venues %}
+						<li><a href="{% url 'glasuntu:venue' venue.id %}">{{ venue.name }}</a></li>
+					{% empty %}
+						<li>There are no liked venues.</li>
+					{% endfor %}
+				</ul>
+			</nav>
+	</div>
+
+
+</body>
+
+{% endblock content %}
